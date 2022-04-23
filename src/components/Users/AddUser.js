@@ -134,8 +134,8 @@ event object. We will see it called SyntheticBaseEvent in the log.
 What stored information might we specifically
 be interested in?
 
-We can use the event object to receive input from the user.
-For example, to take the value that was entered by the user into 
+We can use the event object to save input from the user.
+For example, to save the value that was entered by the user into 
 an input field (the <input> element).
 
 For that we have to have an event listener property such as onChange, onInput, onClick, etc. 
