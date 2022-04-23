@@ -59,5 +59,4 @@ Since we are not sure if anything is passed to props.type. If not, then props.ty
 and thus false, and since OR returns the first truthy value, "button" will be returned
 (since it's not an empty string, and thus is truthy).
 
-
 */
