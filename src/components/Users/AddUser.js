@@ -61,13 +61,13 @@ For submitting a form, intuituively we'd think
 of adding an onClick event listener property on the button 
 meant to submit the form.
 But we don't do that because there is a default behavior in the browser
-for form submittion events that is implemented by adding an onSubmit 
+for form submission events that is implemented by adding an onSubmit 
 event listener property on the <form> itself and by adding type="submit"
 on the <button> meant to submit it.
 
-Unfortunately, a part of this default behavior is a request being sent
-to the web app's hosting server (in this case the development server),
-which makes the page reload.
+Unfortunately, a part of this default form submission behavior 
+is a request being sent to the web app's hosting server 
+(in this case the development server), which makes the page reload.
 We don't need this so we prevent it.
 
 3) className on custom component <Card>:
