@@ -11,6 +11,8 @@ const AddUser = (props) => {
   const addUserHandler = (event) => {
     event.preventDefault();
     console.log(enteredUsername, enteredAge);
+    setEnteredUsername('');
+    setEnteredAge('');
   };
 
   const usernameChangeHandler = (event) => {
@@ -26,9 +28,9 @@ const AddUser = (props) => {
     <Card className={classes.input}>
       <form onSubmit={addUserHandler}>
         <label htmlFor="username">Username</label>
-        <input id="username" type="text" onChange={usernameChangeHandler}/>
+        <input id="username" type="text" onChange={usernameChangeHandler} value={enteredUsername}/>
         <label htmlFor="age">Age (Years)</label>
-        <input id="age" type="number" onChange={ageChangeHandler}/>
+        <input id="age" type="number" onChange={ageChangeHandler} value={enteredAge}/>
         <Button type="submit">Add User</Button>
       </form>
     </Card>
@@ -103,10 +105,15 @@ Calling useState() always returns an array of exactly two elements:
 1) a pointer to the special variable (the value it holds)
 also referred to as the current state snapshot;
 2) a state updating function.
-That is why we use array destructuring to save them like so:
+
+That is why we use array destructuring to save them in two constants like so:
 const [varName, funcName] = useState('initial value');
-The common naming conventions are like so:
+
+The common naming conventions are as follows:
 const [var, setVar] = useState('initial value');
+
+Note: If I'm not mistaken the only reason we need State variables enteredUsername and enteredAge
+is for being able to clear form input fields. Since that does require a UI change.
 
 5) Event object:
 
@@ -152,5 +159,32 @@ So if the listener is on an <input> element, the the target refers to that parti
 Depending on what the DOM element is, the target object might contain
 different properties that we can inspect by expanding the target in the log.
 But for elements that accept input we typically just want the value property.
+
+
+6) Form input resetting:
+
+Logic for resetting form input is easy.
+
+It only comes in two steps:
+   1. Make <input> element value property dependent on the appropriate State variable, for example:
+       <input id="username" type="text" onChange={usernameChangeHandler} value={enteredUsername}/>
+   2. Now that the <input> element's value depends on the value of the assigned State variable,
+      just change the value of that State variable to an empty string in the event handler that fires
+      during form submission, so that the input field empties when the form is submitted.
+
+That's it.
+
+Q: A question that might arise is, but what about saving the input?
+Aren't we using these State variables (in this case enteredUsername, enteredAge)
+for saving the user's input?
+If so, then isn't it counter-intuitive to first save the user's entered value in 
+a state variable just to clear it right after to clear the input field?
+
+A: Actually no.
+If I'm not mistaken the only reason we really need State variables enteredUsername and enteredAge
+is for being able to clear form input fields. Since that does require a UI change.
+And even if we initially do save the user's values inside these State variables,
+that's only temporary since we have to pass these values onto a list of Users.
+
 
 */
