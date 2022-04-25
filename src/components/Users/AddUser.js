@@ -39,6 +39,7 @@ const AddUser = (props) => {
         <input id="age" type="number" onChange={ageChangeHandler} value={enteredAge}/>
         <Button type="submit">Add User</Button>
       </form>
+      <ul></ul>
     </Card>
   );
 };
@@ -219,5 +220,47 @@ E.g.,
 if (+enteredAge < 1){
       return;
     }
+
+
+9) Outputting and managing list - where to do so?
+
+Let's divide this into two questions:
+1. Where should we output our list of items? (List of users in this case)
+2. And where should we manage it? 
+The answer to the second question depends on the answer to the first one.
+
+Since we get the user data here in the AddUser component,
+technically we could simply add more JSX code in that component to render a list.
+Perhaps here under the form:
+        </form>
+      <ul></ul> <-- list here
+    </Card>
+
+We could manage this list within this same component with useState().
+
+This is something we could do and technically it would work.
+But we will not be doing it here because it is best to keep components 
+smaller and more focused so that each has its own task and responsibility.
+
+So it's best to have:
+  - one component that fetches user input (that's this AddUser component)
+  - another component for outputting the list of users.
+This way we split the outputting and the fetching logic into two components.
+
+And therefore we will add a new component into the User folder:
+UserList.js - it will be responsible for outputting user data
+
+Then, we will add a <UsersList> component in App.js under <AddUser>
+like so:
+
+function App() {
+  return (
+    <div>
+      <AddUser />
+      <UsersList />
+    </div>
+  );
+}
+
 
 */
