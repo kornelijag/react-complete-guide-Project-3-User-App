@@ -244,7 +244,7 @@ smaller and more focused so that each has its own task and responsibility.
 
 So it's best to have:
   - one component that fetches user input (that's this AddUser component)
-  - another component for outputting the list of users.
+  - another component for outputting the list of items (users).
 This way we split the outputting and the fetching logic into two components.
 
 And therefore we will add a new component into the User folder:
