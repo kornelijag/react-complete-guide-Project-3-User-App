@@ -10,6 +10,12 @@ const AddUser = (props) => {
 
   const addUserHandler = (event) => {
     event.preventDefault();
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0){
+      return;
+    }
+    if (+enteredAge < 1){
+      return;
+    }
     console.log(enteredUsername, enteredAge);
     setEnteredUsername('');
     setEnteredAge('');
@@ -186,5 +192,32 @@ is for being able to clear form input fields. Since that does require a UI chang
 And even if we initially do save the user's values inside these State variables,
 that's only temporary since we have to pass these values onto a list of Users.
 
+7) Form validation:
+
+This can be done using an IF inside the event handler function that fires
+when the form is submitted. We can return an error message or an empty return.
+We should have an IF statement for every error message, if we're returning errror messages.
+But we can firstly just make empty returns, and create error modals later.
+
+Do it right after this line:
+event.preventDefault();
+
+Now whatever happens during form submission will only happen if the input is valid.
+
+8) Numeric input:
+
+Anything that is entered as input is always received as a string.
+That is just how JS and the HTML DOM work.
+
+But for validation we may need to convert the string input 
+containing a numeric value into a number.
+
+The easiest way to do that is to simply at a + sign before the string
+or the variable containing the string.
+
+E.g.,
+if (+enteredAge < 1){
+      return;
+    }
 
 */
