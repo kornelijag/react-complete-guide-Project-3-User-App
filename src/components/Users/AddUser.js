@@ -250,7 +250,20 @@ This way we split the outputting and the fetching logic into two components.
 And therefore we will add a new component into the User folder:
 UserList.js - it will be responsible for outputting user data
 
-Then, we will add a <UsersList> component in App.js under <AddUser>
+Where will we use <UsersList> then?
+
+We could technically use it in this component (AddUser.js) here:
+        </form>
+      <UsersList /> <-- here
+    </Card>
+
+But from a component structure perspective this doesn't make sense
+because this component, AddUser.js., as the name itself suggests is for
+adding new users, that is, accepting new data for adding new users. 
+The name does not suggest that we are outputting data here
+so it makes more sense to use it in a different component.
+
+It makes sense to add it in App.js next to <AddUser>
 like so:
 
 function App() {
