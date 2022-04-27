@@ -276,4 +276,66 @@ function App() {
 }
 
 
+10) Managing a list of items via State
+
+(In this case a list of users.)
+
+So far when the form submit button is pressed,
+in the addUserHandler we only log the user's entered data.
+
+Now, instead of just logging it, we want to:
+   1 - create a new user object with that data,
+   2 - add it to an array of users object, which we then output in the UsersList component.
+
+The question is, where do we create and manage the stateful array object?
+
+We need to keep in mind that we need to pass the array of users
+to the <UsersList> component in App.js, since that is the component
+responsible for outputting the users' data.
+
+Bearing that in mind, we need to decide which
+component should be used to create and manage the users array.
+
+In any case we have 3 components
+that communicate together to accept new data and output it:
+          App.js 
+          (parent)
+          /    \
+         /      \
+  <AddUser>     <UsersList>
+  (child)         (child)
+
+Technically either one of these three components
+could be used to create and manage the state.
+Depending on which the component is used for that, the trajectory
+of communication will just be different.
+
+All that we need to bear in mind is for data passing is that in React
+direct bottom-up (child-to-parent) communication is not possible.
+So to lift data up from child to parent we need the parent
+to pass down a callback function (pointer to it) to the child component,
+via props and have the child component pass data to it.
+(That's why it is sometimes said that in React there is only top-down communication.)
+
+What makes the decision (where to create and manage the array)
+easiest is thinking in terms of responsibilities.
+Reminder: It's best to keep components small and focused,
+ideally with one responsibility for each.
+
+Let's list these 3 components with their responsibilities:
+App.js - ?
+AddUser - receive input for list
+UsersList - output list contents
+
+It looks like App.js is the only one that doesn't have a responsibility 
+(aside from starting the app, but in this context it doesn't really count),
+so it makes the most sense to let App.js create and manage the users array. :) 
+
+Which means:
+ 1 - We'll create the users array in App.js,
+and create a callback function which will be used to add more elements.
+ 2 - The callback function will be passed via props down to AddUser.js,
+and AddUser.js will pass a new user object into this function as an argument.
+ 3 - Then, App.js will pass a pointer to the array to UsersList.js for display of the list.
+
 */
