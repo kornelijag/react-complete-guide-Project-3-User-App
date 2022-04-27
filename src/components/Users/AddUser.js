@@ -307,15 +307,31 @@ that communicate together to accept new data and output it:
 
 Technically either one of these three components
 could be used to create and manage the state.
-Depending on which the component is used for that, the trajectory
-of communication will just be different.
+But depending on which the component is used for that, the trajectory
+of communication will be different,
+and in some cases the trajectory will turn out to be longer than in others.
 
-All that we need to bear in mind is for data passing is that in React
+When thinking about this we need to bear in mind that in React
 direct bottom-up (child-to-parent) communication is not possible.
 So to lift data up from child to parent we need the parent
 to pass down a callback function (pointer to it) to the child component,
 via props and have the child component pass data to it.
 (That's why it is sometimes said that in React there is only top-down communication.)
+
+Trajectory
+
+In terms of trajectory, what would be the most logical?
+Well, keeping the array in either AddUser or UsersList doesn't really 
+make sense because they both need acces to the array, but they don't have 
+direct access to each other.
+So for AddUser to pass something to UsersList and vice versa, that data
+would always need to go through App.js, the parent component, making the
+data travel "distance" longer each time.
+
+Then, what makes more sense is to keep the array inside App.js,
+since App.js has direct access to both AddUser and UsersList.
+
+Responsibilities 
 
 What makes the decision (where to create and manage the array)
 easiest is thinking in terms of responsibilities.
@@ -329,7 +345,7 @@ UsersList - output list contents
 
 It looks like App.js is the only one that doesn't have a responsibility 
 (aside from starting the app, but in this context it doesn't really count).
-Since it has direct access to both AddUser and UsersList (both which will need access to the array), 
+And since it has direct access to both AddUser and UsersList (both which will need access to the array), 
 it makes the most sense to let App.js create and manage the users array. :) 
 
 Which means:
