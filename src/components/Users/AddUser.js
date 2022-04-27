@@ -328,8 +328,9 @@ AddUser - receive input for list
 UsersList - output list contents
 
 It looks like App.js is the only one that doesn't have a responsibility 
-(aside from starting the app, but in this context it doesn't really count),
-so it makes the most sense to let App.js create and manage the users array. :) 
+(aside from starting the app, but in this context it doesn't really count).
+Since it has direct access to both AddUser and UsersList (both which will need access to the array), 
+it makes the most sense to let App.js create and manage the users array. :) 
 
 Which means:
  1 - We'll create the users array in App.js,
