@@ -26,7 +26,32 @@ const ErrorModal = (props) => {
 export default ErrorModal;
 
 /*
-Choosing where to render the ErrorModal
+1) Backdrop for the modal
+
+What is a backdrop?
+Upon googling, I didn't really understand what it is.
+
+@6:50 video "Adding the ErrorModal Component" 18%
+Tutorial author describes what a backdrop is:
+
+A backdrop is an overlay between the modal overlay
+and the actual main page, so that we can't interact with the rest
+of the main page when the modal is displayed.
+For example, so that we couldn't click the form submit button while
+the error is being shown in the modal.
+
+To add the backdrop we use this:
+<div className={classes.backdrop} />
+The div itself is empty, but the backdrop CSS class
+makes sure that we have this gray-ish black transparent-ish
+background behind the modal: rgba(0, 0, 0, 0.75)
+
+QUESTION! I'm a bit confused as to how simply setting a background color
+makes it impossible to interact with the main page,
+as the tutorial author doesn't really explain this.
+
+
+2) Choosing where to render the ErrorModal
 
 Now the question is, where is it best render
 this ErrorModal component? Inside of which component?
