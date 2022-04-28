@@ -16,7 +16,9 @@ const AddUser = (props) => {
     if (+enteredAge < 1){
       return;
     }
-    console.log(enteredUsername, enteredAge);
+    //console.log(enteredUsername, enteredAge);
+    props.onAddUser(enteredUsername, enteredAge);
+
     setEnteredUsername('');
     setEnteredAge('');
   };
@@ -276,7 +278,7 @@ function App() {
 }
 
 
-10) Managing a list of items via State
+10) Choosing a component that will manage the Stateful List
 
 (In this case a list of users.)
 
@@ -286,6 +288,7 @@ in the addUserHandler we only log the user's entered data.
 Now, instead of just logging it, we want to:
    1 - create a new user object with that data,
    2 - add it to an array of users object, which we then output in the UsersList component.
+
 
 The question is, where do we create and manage the stateful array object?
 
@@ -318,7 +321,7 @@ to pass down a callback function (pointer to it) to the child component,
 via props and have the child component pass data to it.
 (That's why it is sometimes said that in React there is only top-down communication.)
 
-Trajectory
+Trajectory (or Access to other components)
 
 In terms of trajectory, what would be the most logical?
 Well, keeping the array in either AddUser or UsersList doesn't really 
@@ -326,12 +329,12 @@ make sense because they both need acces to the array, but they don't have
 direct access to each other.
 So for AddUser to pass something to UsersList and vice versa, that data
 would always need to go through App.js, the parent component, making the
-data travel "distance" longer each time.
+data travelling "distance" longer each time.
 
 Then, what makes more sense is to keep the array inside App.js,
 since App.js has direct access to both AddUser and UsersList.
 
-Responsibilities 
+Responsibilities
 
 What makes the decision (where to create and manage the array)
 easiest is thinking in terms of responsibilities.
@@ -354,5 +357,8 @@ and create a callback function which will be used to add more elements.
  2 - The callback function will be passed via props down to AddUser.js,
 and AddUser.js will pass a new user object into this function as an argument.
  3 - Then, App.js will pass a pointer to the array to UsersList.js for display of the list.
+
+During the bottom-up communication from <AddUser> to App.js we will also have to
+use the concept of "Lifting the state up". Check comments in App.js.
 
 */
